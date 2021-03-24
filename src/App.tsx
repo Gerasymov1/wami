@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Posts from './components/Posts'
+import {BrowserRouter, Route} from 'react-router-dom'
+import store from "./store/store";
+import {Provider} from "react-redux";
+import Header from "./components/Header";
+import PostPage from "./components/PostPage";
+import {Form} from "./components/Form";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    return (
+        <Provider store={store}>
+            <BrowserRouter>
+                <div>
+                    <Header/>
+                    <Route path='/posts' exact={true} component={Posts}/>
+                    <Route path='/post' exact={true} component={PostPage}/>
+                    <Route path='/form' exact={true} component={Form}/>
+                </div>
+            </BrowserRouter>
+        </Provider>
+    );
+};
 
 export default App;
